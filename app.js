@@ -19,3 +19,8 @@ app.listen(puerto,()=>{
 app.get("/misaludo",(req,res)=>{
     res.send(`<h1>Saludo<h1/> <p><h3>Mi nombres es Jorge Torres de ADSO de la fiche 3407180 y estoy en codificacion<h3/>${mivar}`)
 })
+
+app.listen(puerto,()=>{
+    console.log(`SERVIDOR hhttp://localhost:${puerto}
+    http://127.0.0.1:${puerto}`)
+});
