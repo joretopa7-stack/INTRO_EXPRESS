@@ -1,7 +1,9 @@
-//import express from "express"; //ES
-const express = require("express")//CJS
+import express from "express"; //ES
+import {configDotenv} from "dontenv"
+configDotenv()
+//const express = require("express")//CJS
 const app = express()
-const puerto = process.env.PORT || 3500;
+const puerto = process.env.PORT || 3000;
 
 app.get("/",(req,res)=>{
     res.send("Hola ficha 3407180 del SENA")
