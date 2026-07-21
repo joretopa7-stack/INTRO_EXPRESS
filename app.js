@@ -14,3 +14,8 @@ app.get("/",(req,res)=>{
 app.listen(puerto,()=>{
     console.log(`Servidor funcionando en el puerto ${puerto}!!`);
 })
+
+//Endpoint de saludo//
+app.get("/misaludo",(req,res)=>{
+    res.send(`<h1>Saludo<h1/> <p><h3>Mi nombres es Jorge Torres de ADSO de la fiche 3407180 y estoy en codificacion<h3/>${mivar}`)
+})
