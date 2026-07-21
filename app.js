@@ -19,7 +19,7 @@ app.listen(puerto,()=>{
 app.get("/misaludo/:ficha",(req,res)=>{
     const ficha = req.params.ficha
 
-    res.send(`<h1>Saludo<h1/> <p><h3>Mi nombres es Jorge Torres de ADSO de la ficha ${3407180} y estoy en codificacion<h3/>`)
+    res.send(`<h1>Saludo<h1/> <p><h3>Mi nombres es Jorge Torres de ADSO de la ficha ${ficha} y estoy en codificacion<h3/>`)
 });
 
 app.listen(puerto,()=>{
