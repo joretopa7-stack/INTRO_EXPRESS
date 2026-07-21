@@ -1,5 +1,5 @@
 import express from "express"; //ES
-import {configDotenv} from "dontenv"
+import {configDotenv} from "dotenv"
 configDotenv()
 //const express = require("express")//CJS
 const app = express()
