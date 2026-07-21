@@ -1,7 +1,9 @@
 import express from "express"; //ES
-import {configDotenv} from "dotenv"
-configDotenv()
+//import {configDotenv} from "dotenv"
+//configDotenv()
 //const express = require("express")//CJS
+import "dotenv/config"
+
 const app = express()
 const puerto = process.env.PORT || 3000;
 
