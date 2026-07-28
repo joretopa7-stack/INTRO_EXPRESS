@@ -32,3 +32,24 @@ app.get("/clientes/:id",(req,res)=>{
     const id = req.params.id
     res.send(`<h1>Clientes<h1/> <p><h3>Soy el cliente con ID${id}<h3/>`)
 });
+
+//28-07-2026 productos y libros
+app.get("/categoria", (req, res) => {
+    res.send("Listado de categorías");
+});
+
+
+
+app.get("/productos/:categoria/:id", (req, res) => {
+    const categoria = req.params.categoria;
+    const id = req.params.id;
+
+    res.send(`Producto ${id} de la categoría ${categoria}`);
+});
+
+
+app.get("/libros/:isbn", (req, res) => {
+    const isbn = req.params.isbn;
+
+    res.send(`Libro con ISBN: ${isbn}`);
+});
