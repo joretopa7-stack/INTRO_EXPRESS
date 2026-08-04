@@ -2,7 +2,9 @@
 //import {configDotenv} from "dotenv"
 //configDotenv()
 const express = require("express")//CJS
-import "dotenv/config"
+require("dotenv").config() //CJS
+//import "dotenv/config"
+
 
 const app = express()
 const puerto = process.env.PORT || 3000;
@@ -84,3 +86,7 @@ app.get("/peliculas", (req, res) => {
 
 
 ///Parámetros de consulta (req.query): permiten enviar información al servidor a través de la URL, después del signo ?. Cada parámetro se escribe como clave=valor y se separa con &. Express recibe esos datos en el objeto req.query, lo que facilita realizar búsquedas, filtros o consultas.
+
+app.listen(puerto, () => {
+    console.log(`Servidor ejecutándose en http://localhost:${puerto}`);
+});
