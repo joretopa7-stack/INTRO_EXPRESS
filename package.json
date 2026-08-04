@@ -2,7 +2,7 @@
   "name": "intro_express",
   "version": "1.0.0",
   "description": "",
-  "types": "module",
+  "types": "commonjs",
   "main": "index.js",
   "scripts": {
     "dev": "node --watch app.js",
