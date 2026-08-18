@@ -1,0 +1,27 @@
+[
+  {
+    "di": 12,
+    "nombre": "ana",
+    "correo": "an@gmail.com",
+    "imagen": "url"
+  },
+  {
+    "di": 12,
+    "nombre": "ana",
+    "correo": "an@gmail.com",
+    "imagen": "url"
+  },
+  {
+    "di": 12,
+    "nombre": "ana",
+    "correo": "an@gmail.com",
+    "imagen": "url"
+  },
+  {
+    "di": 17,
+    "nombre": "ana",
+    "correo": "an@gmail.com",
+    "imagen": "url"
+  },
+  null
+]
