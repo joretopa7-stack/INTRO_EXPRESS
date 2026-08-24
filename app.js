@@ -1,89 +1,61 @@
-const express = require("express");
-const app = express();
-
-// Configuración de body-json
-app.use(express.json());
-
-const sistemaArchivos = require("fs");
-const ruta = require("path");
-
+const express = require ("express")
+const app = express()
+//Configuracion de body-json
+app.use(express.json())
+const sistemaArchivos = require("fs")
+const path = require("path")
+const ruta = require ("path")
+const { json } = require("stream/consumers")
 const PORT = process.env.PORT || 3030;
 
-const rutaArchivoJson = ruta.join(__dirname, "aprendices.json");
-
-// Endpoint principal
-app.get("/", (req, res) => {
-    res.send("Hola 3407180 del SENA");
-});
+const rutaArchivoJson = ruta.join(__dirname, "aprendices.json")
+app.get("/",(req,res)=>{
+    res.send("Hola  3407180 del SENA")
+})
 
 
-// ENDPOINT PARA LISTAR APRENDICES
+// LISTO PARA CREAR ENPOINTS 
 
-app.get("/api/aprendices", (req, res) => {
-
-    sistemaArchivos.readFile(
-        rutaArchivoJson,
-        "utf-8",
-        (error, datos) => {
-
-            if (error) {
-                return res.status(500).json({
-                    Error: "Error conexion bd."
-                });
-            }
-
-            const listaAprendices = JSON.parse(datos);
-
-            res.json(listaAprendices);
+app.get("/api/aprendices",(req,res)=>{
+    sistemaArchivos.readFile(rutaArchivoJson,"utf-8",(error , datos) => 
+    {
+        if (error){
+            return res.status(500).json({Error: "Error conexion bd."})
         }
-    );
-});
+        const listaAprendices = JSON.parse(datos)
+        res.json(listaAprendices)
+    })
+    
+})
 
-// ENDPOINT PARA ADICIONAR APRENDIZ
+//ENDPOINT PARA ADICIONAR 
 
-
-app.post("/api/aprendices", (req, res) => {
-
-    // Capturar los datos enviados
-    const datosAprendiz = req.body;
-
-    sistemaArchivos.readFile(
-        rutaArchivoJson,
-        "utf-8",
-        (error, datos) => {
-
-            if (error) {
-                return res.status(500).json({
-                    Error: "Error conexion bd."
-                });
-            }
-
-            const listaAprendices = JSON.parse(datos);
-
-            // Agregar a la lista
-            listaAprendices.push(datosAprendiz);
-
-            // Escritura del archivo
-            sistemaArchivos.writeFile(
-                rutaArchivoJson,
-                JSON.stringify(listaAprendices, null, 2),
-                (error) => {
-
-                    if (error) {
-                        return res.status(500).json({
-                            Error: "No se puede registrar"
-                        });
-                    }
-
-                    res.status(201).json(datosAprendiz);
-                }
-            );
+app.post("/api/aprendices",(req , res ) => {
+    // capturar los datos enviados 
+    const datosAprendiz = req.body
+        sistemaArchivos.readFile(rutaArchivoJson,"utf-8",(error , datos) => 
+    {
+        if (error){
+            return res.status(500).json({Error: "Error conexion bd."})
         }
-    );
-});
+        const listaAprendices = JSON.parse(datos)
+            // agregar a la lista javascript
+        listaAprendices.push(datosAprendiz)
+            //escritura de archivo 
+        sistemaArchivos.writeFile(rutaArchivoJson, JSON.stringify (listaAprendices , null,
+            2
+        ), (error) => {
+            if(error){
+                return res.json({Error: "No se puede registrar"})
+            }
+            res.status(201).json(datosAprendiz)
+        })
+        
+    })
 
+})
 
-// ENDPOINT PARA EDITAR APRENDIZ
+//endpoint para editar 
 
 app.put("/api/aprendices/:id", (req, res) => {
 
@@ -133,13 +105,7 @@ app.put("/api/aprendices/:id", (req, res) => {
 });
 
 
-
-app.listen(PORT, () => {
-    console.log(`Servidor http://localhost:${PORT}`);
-});
-
-// ENDPOINT PARA ELIMINAR APRENDIZ
-
+// Endpoint para eliminar
 app.delete("/api/aprendices/:id", (req, res) => {
 
     const id = parseInt(req.params.id);
@@ -155,25 +121,24 @@ app.delete("/api/aprendices/:id", (req, res) => {
         const listaAprendices = JSON.parse(datos);
 
         // Buscar el aprendiz
-        const aprendiz = listaAprendices.find(
+        const indice = listaAprendices.findIndex(
             aprendiz => aprendiz.id === id
         );
 
-        if (!aprendiz) {
+        // Si no existe
+        if (indice === -1) {
             return res.status(404).json({
                 Error: "Aprendiz no encontrado"
             });
         }
 
         // Eliminar aprendiz
-        const nuevaLista = listaAprendices.filter(
-            aprendiz => aprendiz.id !== id
-        );
+        const aprendizEliminado = listaAprendices.splice(indice, 1);
 
         // Guardar archivo actualizado
         sistemaArchivos.writeFile(
             rutaArchivoJson,
-            JSON.stringify(nuevaLista, null, 2),
+            JSON.stringify(listaAprendices, null, 2),
             (error) => {
 
                 if (error) {
@@ -184,9 +149,13 @@ app.delete("/api/aprendices/:id", (req, res) => {
 
                 res.json({
                     mensaje: "Aprendiz eliminado correctamente",
-                    aprendiz: aprendiz
+                    aprendiz: aprendizEliminado[0]
                 });
             }
         );
     });
 });
+
+app.listen(PORT,()=>{
+    console.log(`Servidor http://localhost:${PORT}`);
+})
